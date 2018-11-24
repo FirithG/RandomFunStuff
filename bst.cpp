@@ -1,36 +1,42 @@
 #include "bst.hpp"
 #include <iostream>
 
-Node * const Bst::getRoot() const
+template <typename T>
+typename Bst<T>::Node * const Bst<T>::getRoot() const
 {
 	return root;
 }
 
-Node * const Bst::getLeft(const Node * root) const
+template <typename T>
+typename Bst<T>::Node * const Bst<T>::getLeft(const Bst<T>::Node * root) const
 {
 	return root->left;
 }
 
-Node * const Bst::getRight(const Node * root) const
+template <typename T>
+typename Bst<T>::Node * const Bst<T>::getRight(const Bst<T>::Node * root) const
 {
 	return root->right;
 }
 
-void Bst::insert(int value)
+template <typename T>
+void Bst<T>::insert(T value)
 {
-	Node * node = new Node(value);
+	Bst<T>::Node * node = new Node(value);
 	if (root == nullptr)
 		root = node;
 	else
 		insertAt(root, node);
 }
 
-Node *  Bst::remove(int value)
+template <typename T>
+typename Bst<T>::Node * Bst<T>::remove(T value)
 {
 	return remove(root, value);
 }
 
-Node * Bst::remove(Node * root, int value)
+template <typename T>
+typename Bst<T>::Node * Bst<T>::remove(Bst<T>::Node * root, T value)
 {
 	if (root == nullptr)
 		return root;
@@ -61,19 +67,22 @@ Node * Bst::remove(Node * root, int value)
 	return root;
 }
 
-Node * Bst::inOrderSuccessor(Node * root)
+template <typename T>
+typename Bst<T>::Node * Bst<T>::inOrderSuccessor(Bst<T>::Node * root)
 {
 	if (root->left == nullptr)
 		return root;
 	return inOrderSuccessor(root->left);
 }
 
-Node * Bst::find(int value)
+template <typename T>
+typename Bst<T>::Node * Bst<T>::find(T value)
 {
 	return find(root, value);
 }
 
-Node * Bst::find(Node * root, int value)
+template <typename T>
+typename Bst<T>::Node * Bst<T>::find(Bst<T>::Node * root, T value)
 {
 	if (root == nullptr)
 		return root;
@@ -84,19 +93,22 @@ Node * Bst::find(Node * root, int value)
 	return find(root->left, value);
 }
 
-std::string Bst::printInOrder()
+template <typename T>
+std::string Bst<T>::printInOrder()
 {
 	return inOrder(root);
 }
 
-std::string Bst::inOrder(Node * root)
+template <typename T>
+std::string Bst<T>::inOrder(Bst<T>::Node * root)
 {
 	if (root == nullptr)
 		return "";
 	return inOrder(root->left) + " " + std::to_string(root->value) + " " + inOrder(root->right);
 }
 
-void Bst::insertAt(Node * root, Node * child)
+template <typename T>
+void Bst<T>::insertAt(Bst<T>::Node * root, Bst<T>::Node * child)
 {
 	if (root->value >= child->value)
 	{
@@ -116,7 +128,7 @@ void Bst::insertAt(Node * root, Node * child)
 
 int main()
 {
-	Bst bst;
+	Bst<int> bst;
 	bst.insert(30);
 	bst.insert(26);
 	bst.insert(10);
@@ -130,7 +142,7 @@ int main()
 
 	std::cout << bst.printInOrder() << std::endl;
 
-	Node * found = bst.find(10);
+	Bst<int>::Node * found = bst.find(10);
 	if (found)
 		std::cout << found->value << std::endl;
 	else

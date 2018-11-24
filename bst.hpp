@@ -1,26 +1,25 @@
 #include <string>
 
-struct Node
-{
-	explicit Node(int n)
-	{
-		value = n;
-	}
-
-	int value;
-	Node * left = nullptr;
-	Node * right = nullptr;
-};
-
+template <typename T>
 class Bst
 {
-
 public:
+	struct Node
+	{
+		explicit Node(T n)
+		{
+			value = n;
+		}
 
-	void insert(int value);
+		T value;
+		Node * left = nullptr;
+		Node * right = nullptr;
+	};
+
+	void insert(T value);
 	std::string printInOrder();
-	Node * find(int value);
-	Node * remove(int value);
+	Node * find(T value);
+	Node * remove(T value);
 
 	Node * const getRoot() const;
 	Node * const getLeft(const Node * const root) const;
@@ -30,8 +29,8 @@ public:
 private:
 	void insertAt(Node * root, Node * child);
 	std::string inOrder(Node * root);
-	Node * find(Node * root, int value);
-	Node * remove(Node * root, int value);
+	Node * find(Node * root, T value);
+	Node * remove(Node * root, T value);
 
 	Node * root = nullptr;
 
