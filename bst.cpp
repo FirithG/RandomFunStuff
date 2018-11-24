@@ -16,29 +16,29 @@ Node * const Bst::getRight(const Node * root) const
 	return root->right;
 }
 
-void Bst::insert(int n)
+void Bst::insert(int value)
 {
-	Node * node = new Node(n);
+	Node * node = new Node(value);
 	if (root == nullptr)
 		root = node;
 	else
 		insertAt(root, node);
 }
 
-Node *  Bst::remove(int i)
+Node *  Bst::remove(int value)
 {
-	return remove(root, i);
+	return remove(root, value);
 }
 
-Node * Bst::remove(Node * root, int i)
+Node * Bst::remove(Node * root, int value)
 {
 	if (root == nullptr)
 		return root;
 
-	if (i < root->value)
-		root->left = remove(root->left, i);
-	else if (i > root->value)
-		root->right = remove(root->right, i);
+	if (value < root->value)
+		root->left = remove(root->left, value);
+	else if (value > root->value)
+		root->right = remove(root->right, value);
 	else
 	{
 		if (root->left == nullptr)
@@ -61,27 +61,27 @@ Node * Bst::remove(Node * root, int i)
 	return root;
 }
 
-Node * Bst::inOrderSuccessor(Node * node)
+Node * Bst::inOrderSuccessor(Node * root)
 {
-	if (node->left == nullptr)
-		return node;
-	return inOrderSuccessor(node->left);
+	if (root->left == nullptr)
+		return root;
+	return inOrderSuccessor(root->left);
 }
 
-Node * Bst::find(int i)
+Node * Bst::find(int value)
 {
-	return find(root, i);
+	return find(root, value);
 }
 
-Node * Bst::find(Node * n, int i)
+Node * Bst::find(Node * root, int value)
 {
-	if (n == nullptr)
-		return nullptr;
-	if (n->value == i)
-		return n;
-	if (n->value < i)
-		return find(n->right, i);
-	return find(n->left, i);
+	if (root == nullptr)
+		return root;
+	if (root->value == value)
+		return root;
+	if (root->value < value)
+		return find(root->right, value);
+	return find(root->left, value);
 }
 
 std::string Bst::printInOrder()
@@ -89,28 +89,28 @@ std::string Bst::printInOrder()
 	return inOrder(root);
 }
 
-std::string Bst::inOrder(Node * node)
+std::string Bst::inOrder(Node * root)
 {
-	if (node == nullptr)
+	if (root == nullptr)
 		return "";
-	return inOrder(node->left) + " " + std::to_string(node->value) + " " + inOrder(node->right);
+	return inOrder(root->left) + " " + std::to_string(root->value) + " " + inOrder(root->right);
 }
 
-void Bst::insertAt(Node * parent, Node * n)
+void Bst::insertAt(Node * root, Node * child)
 {
-	if (parent->value >= n->value)
+	if (root->value >= child->value)
 	{
-		if (parent->left == nullptr)
-			parent->left = n;
+		if (root->left == nullptr)
+			root->left = child;
 		else
-			insertAt(parent->left, n);
+			insertAt(root->left, child);
 	}
 	else
 	{
-		if (parent->right == nullptr)
-			parent->right = n;
+		if (root->right == nullptr)
+			root->right = child;
 		else
-			insertAt(parent->right, n);
+			insertAt(root->right, child);
 	}
 }
 

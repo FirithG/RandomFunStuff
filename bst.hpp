@@ -17,21 +17,21 @@ class Bst
 
 public:
 
-	void insert(int n);
+	void insert(int value);
 	std::string printInOrder();
-	Node * find(int i);
-	Node * remove(int i);
+	Node * find(int value);
+	Node * remove(int value);
 
 	Node * const getRoot() const;
-	Node * const getLeft(const Node * const parent) const;
-	Node * const getRight(const Node * const parent) const;
-	Node * inOrderSuccessor(Node * n);
+	Node * const getLeft(const Node * const root) const;
+	Node * const getRight(const Node * const root) const;
+	Node * inOrderSuccessor(Node * root);
 
 private:
-	void insertAt(Node * parent, Node * n);
-	std::string inOrder(Node * node);
-	Node * find(Node * n, int i);
-	Node * remove(Node * root, int i);
+	void insertAt(Node * root, Node * child);
+	std::string inOrder(Node * root);
+	Node * find(Node * root, int value);
+	Node * remove(Node * root, int value);
 
 	Node * root = nullptr;
 
