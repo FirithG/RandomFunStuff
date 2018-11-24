@@ -136,10 +136,6 @@ int main()
 	bst.insert(11);
 	bst.insert(4);
 	bst.insert(20);
-	// const Node * n = bst.getRoot();
-	// const Node * left = bst.getLeft(n);
-	// const Node * right = bst.getRight(n);
-
 	std::cout << bst.printInOrder() << std::endl;
 
 	Bst<int>::Node * found = bst.find(10);
@@ -150,7 +146,5 @@ int main()
 
 	bst.remove(30);
 	std::cout << bst.printInOrder() << std::endl;
-	//std::cout << n->value << " " << left->value  << " " << right->value << std::endl;
-	//std::cout << left->left->value << std::endl;
 	return 0;
 }
