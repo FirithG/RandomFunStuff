@@ -31,7 +31,7 @@ private:
 	void insertAt(Node * parent, Node * n);
 	std::string inOrder(Node * node);
 	Node * find(Node * n, int i);
-	Node * remove(Node * n, int i);
+	Node * remove(Node * root, int i);
 
 	Node * root = nullptr;
 

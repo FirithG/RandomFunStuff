@@ -6,14 +6,14 @@ Node * const Bst::getRoot() const
 	return root;
 }
 
-Node * const Bst::getLeft(const Node * parent) const
+Node * const Bst::getLeft(const Node * root) const
 {
-	return parent->left;
+	return root->left;
 }
 
-Node * const Bst::getRight(const Node * parent) const
+Node * const Bst::getRight(const Node * root) const
 {
-	return parent->right;
+	return root->right;
 }
 
 void Bst::insert(int n)
@@ -30,35 +30,35 @@ Node *  Bst::remove(int i)
 	return remove(root, i);
 }
 
-Node * Bst::remove(Node * n, int i)
+Node * Bst::remove(Node * root, int i)
 {
-	if (n == nullptr)
-		return n;
+	if (root == nullptr)
+		return root;
 
-	if (i < n->value)
-		n->left = remove(n->left, i);
-	else if (i > n->value)
-		n->right = remove(n->right, i);
+	if (i < root->value)
+		root->left = remove(root->left, i);
+	else if (i > root->value)
+		root->right = remove(root->right, i);
 	else
 	{
-		if (n->left == nullptr)
+		if (root->left == nullptr)
 		{
-			Node * newNode = n->right;
-			delete n;
-			return newNode;
+			Node * newRoot = root->right;
+			delete root;
+			return newRoot;
 		}
-		if (n->right == nullptr)
+		if (root->right == nullptr)
 		{
-			Node * newNode = n->left;
-			delete n;
-			return newNode;
+			Node * newRoot = root->left;
+			delete root;
+			return newRoot;
 		}
 
-		Node * successor = inOrderSuccessor(n->right);
-		n->value = successor->value;
-		n->right = remove(n->right, successor->value);
+		Node * successor = inOrderSuccessor(root->right);
+		root->value = successor->value;
+		root->right = remove(root->right, successor->value);
 	}
-	return n;
+	return root;
 }
 
 Node * Bst::inOrderSuccessor(Node * node)
