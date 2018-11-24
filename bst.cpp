@@ -27,7 +27,7 @@ void Bst::insert(int n)
 
 Node *  Bst::remove(int i)
 {
-	remove(root, i);
+	return remove(root, i);
 }
 
 Node * Bst::remove(Node * n, int i)
@@ -43,9 +43,22 @@ Node * Bst::remove(Node * n, int i)
 	{
 		if (n->left == nullptr)
 		{
-			
+			Node * newNode = n->right;
+			delete n;
+			return newNode;
 		}
+		if (n->right == nullptr)
+		{
+			Node * newNode = n->left;
+			delete n;
+			return newNode;
+		}
+
+		Node * successor = inOrderSuccessor(n->right);
+		n->value = successor->value;
+		n->right = remove(n->right, successor->value);
 	}
+	return n;
 }
 
 Node * Bst::inOrderSuccessor(Node * node)
@@ -123,8 +136,8 @@ int main()
 	else
 		std::cout << "null node" << std::endl;
 
-	Node * successor = bst.inOrderSuccessor(found);
-	std::cout << "successor: " << successor->value;
+	bst.remove(30);
+	std::cout << bst.printInOrder() << std::endl;
 	//std::cout << n->value << " " << left->value  << " " << right->value << std::endl;
 	//std::cout << left->left->value << std::endl;
 	return 0;
